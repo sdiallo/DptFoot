@@ -1,0 +1,18 @@
+%form{ name: 'connectForm' }
+  .form-group
+    %label{ for: 'connectName' }
+      Email ou Nom d'utilisateur :
+    %input#connectName.form-control{name: 'uName', 'ng-model' => 'userConnect.login', type: 'text', required: '' }/
+    %div{'ng-show' => 'loginError'}
+      %span
+        {{loginError}}
+  .form-group
+    %label{ for: 'connectPass' }
+      Mot de passe :
+    %input#connectPass.form-control{name: 'uPass', 'ng-model' => 'userConnect.password', type: 'password', required: '' }/
+  %button.btn.btn-default{ type: 'submit', data: { 'ng-click' => 'login(userConnect)', 'ng-disabled' => 'connectForm.$invalid' } }
+    Se connecter
+%br
+Pas encore de compte?
+%a.change-connect{'ng-click' => 'changeWanted(false)' }
+  S'inscrire

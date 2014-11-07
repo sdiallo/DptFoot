@@ -1,0 +1,19 @@
+{{profile.username}}
+%br
+%div{ data: { 'ng-if' => 'user.id && avalaibleFriend' } }
+  %button{ data: { 'ng-click' => 'sendFriendShipInvitation()' } }
+    Invite
+%br
+FRIENDS : 
+%div{ data: { 'ng-repeat' => 'friend in profile.friends.real_friends'} }
+  {{friend.username}}
+%br
+%div{ data: { 'ng-if' => 'myProfile' } }
+  FRIENDS WAITING YOUR RESPONSE :
+  %div{ data: { 'ng-repeat' => 'friend in profile.friends.waiting_friends'} }
+    {{friend.username}}
+    {{friend.id}}
+    %button{ data: { 'ng-click' => 'responseFriendShip(friend.id, true)' } }
+      ACCEPT
+    %button{ data: { 'ng-click' => 'responseFriendShip(friend.id, false)' } }
+      REFUSED

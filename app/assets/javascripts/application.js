@@ -1,0 +1,14 @@
+//= require jquery
+//= require jquery_ujs
+//= require angular
+//= require angular-resource
+//= require angular-route
+//= require angular-animate
+//= require angular-ui-router.min
+//= require devise.min
+//= require angular-rails-templates
+//= require_tree ./templates
+//= require angular/dpt_foot
+//= require_tree ./angular/controllers
+//= require_tree ./angular/values
+//= require_tree ./angular/factories

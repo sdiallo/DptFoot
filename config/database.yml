@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: dptfoot_development
+  pool: 5
+  host: localhost
+  username: ideesbebe
+  password: sefsef
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: dptfoot_test
+  host: localhost
+  pool: 5
+  username: ideesbebe
+  password: sefsef
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: dptfoot_production
+  host: localhost
+  pool: 5
+  username: ideesbebe
+  password: sefsef

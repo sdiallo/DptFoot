@@ -1,0 +1,14 @@
+#user-header
+  #user-image
+    %span.glyphicon.glyphicon-user
+  %br
+  {{user.username}}
+  %br
+  {{user.email}}
+  %br
+  %br
+  %a{ data: { 'ui-sref' => 'user({ userId: user.slug })' } }
+    Mon profil
+  %button.btn.btn-default{'ng-click' => 'logout()' }
+    %span.glyphicon.glyphicon-off
+    Logout

@@ -1,0 +1,31 @@
+%form#register-form-block{ name: 'registerForm' }
+  .form-group
+    %label{ for: 'registerName' }
+      Name:
+    %input#registerName.form-control{name: 'uName', 'ng-model' => 'userRegister.username', min: '2',type: 'text', required: '' }
+    .errors
+      %span{'ng-show' => 'registerErrors.username'} {{registerErrors.username[0]}}
+
+  .form-group
+    %label{ for: 'registerMail' }
+      E-mail:
+    %input#registerMail.form-control{name: 'uEmail', 'ng-model' => 'userRegister.email', type: 'email', required: '' }
+    .errors
+      %span{'ng-show' => 'registerErrors.email'} {{registerErrors.email[0]}}
+
+  .form-group
+    %label{ for: 'registerPass' }
+      Password:
+    %input#registerPass.form-control{name: 'uPassword', 'ng-model' => 'userRegister.password', min: '6', type: 'password', required: '' }
+    %span.pass-minimum
+      * Au minimum 6 caractères
+    .errors
+      %span{'ng-show' => 'registerErrors.password'} {{registerErrors.password[0]}}
+
+  %button.btn.btn-default{'ng-click' => 'register(userRegister)', 'ng-disabled' => 'registerForm.$invalid'}
+    S'inscrire
+%br
+
+Déjà un compte?
+%a.change-connect{'ng-click' => 'changeWanted(true)' }
+  Se connecter

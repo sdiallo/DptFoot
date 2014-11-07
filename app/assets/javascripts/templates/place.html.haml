@@ -1,0 +1,9 @@
+%div
+  {{place.name}}
+  {{place.address}}
+
+%div{ data: { 'ng-repeat' => 'participation in place.participations_with_users' } }
+  {{participation.user.username}}
+%div{ data: { 'ng-if' => 'user.id && !is_participant' } }
+  %button{ data: { 'ng-click' => 'participate()' } }
+    PARTICIPATE

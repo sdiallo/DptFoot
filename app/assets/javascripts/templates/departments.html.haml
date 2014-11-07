@@ -1,0 +1,3 @@
+%div{ data: { 'ng-repeat' => 'department in departments' } }
+  %a{ data: { 'ui-sref' => 'places({ departmentId: department.slug})', 'ng-click' => 'setSelectedDepartment(department)' } }
+    {{department.name}}

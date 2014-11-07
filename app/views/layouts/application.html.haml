@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title DptFoot
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+  %body{ data: { 'ng-app' => 'DptFoot'} }
+    %p.notice= flash[:notice]
+    %p.alert= flash[:alert]
+
+    %div{ data: { 'ng-controller' => 'NavController' } }
+      %a{ data: { 'ui-sref' => 'home' } }
+        HOME
+      %div{ data: { 'ng-if' => '!user.id' } }
+        %button{ data: { 'ng-click' => 'setPreviousUrl()' } }
+          Se connecter/S'inscrire
+      %div{ data: { 'ng-if' => 'user.id' } }
+        {{user.username}}
+        %a{ data: { 'ui-sref' => 'user({ userId: user.slug })' } }
+          Mon profil
+
+    #view{ data: { 'ui-view' => '' } }
+
+    = javascript_include_tag 'application'
