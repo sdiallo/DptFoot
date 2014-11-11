@@ -1,5 +1,7 @@
 class FriendShipsController < ApplicationController
 
+  before_action :validate_token!
+
   def create
 
     friendship = FriendShip.create(friendship_params)

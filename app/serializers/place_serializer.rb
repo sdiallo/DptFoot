@@ -1,8 +1,7 @@
 class PlaceSerializer < ApplicationSerializer
-  attributes :id, :name, :address, :slug, :department_slug, :participations_with_users
+  attributes :id, :name, :address, :town, :slug, :department_slug, :participations_with_users, :participations_count_today
 
   has_one :department
-  has_many :participations
 
   def slug
     object.slug
@@ -16,6 +15,10 @@ class PlaceSerializer < ApplicationSerializer
     object.participations.todays.map do |participation|
       ParticipationSerializer.new(participation, except: :user_id, root: false)
     end
+  end
+
+  def participations_count_today
+    object.participations.todays.count
   end
 
 end

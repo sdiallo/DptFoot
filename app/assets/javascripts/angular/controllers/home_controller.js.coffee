@@ -24,31 +24,26 @@ DptFoot.controller 'HomeCtrl', ['$window', 'Current', '$rootScope', '$scope', '$
       $scope.setCurrentUser(data)
       $scope.resetErrors()
       $rootScope.$broadcast 'user:logged_in', data
-      $scope.redirectOnLogin() if $rootScope.referer?
+      $scope.redirectOnLogin($rootScope.referer)
     , error = (data) ->
       $scope.loginError = data.data
 
-      
-  $scope.logout = () ->
-    User.destroy_session { user: { id: Current.user.id } }, (data) ->
-      Current.user = null
-      Current.auth_token = null
-      $scope.user = null
 
   $scope.changeWanted = (wanted) ->
     $scope.wantConnect = wanted
 
   $scope.setCurrentUser = (user) ->
     Current.user = user
-    Current.auth_token = user.authentication_token
-    $scope.user = user
+    localStorage['clientToken'] = user.authentication_token
+    localStorage['clientId'] = user.id
 
   $scope.resetErrors = () ->
     $scope.loginError = null
     $scope.registerErrors = null
 
 
-  $scope.redirectOnLogin = () ->
-    $location.url($rootScope.referer)
+  $scope.redirectOnLogin = (referer) ->
+    return $state.go('departments') if !referer?
+    $location.url(referer)
     $rootScope.referer = null
 ]

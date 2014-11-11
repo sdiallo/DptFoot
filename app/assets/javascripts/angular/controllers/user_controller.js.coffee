@@ -34,10 +34,9 @@ DptFoot.controller 'UserCtrl', ['$scope', '$stateParams', '$filter', 'Current', 
     $scope.avalaibleFriend = friendship.length < 1
 
   $scope.responseFriendShip = (friendId, response) ->
-
     friendShipId = $filter('filter')($scope.profile.friendships, (friendship) -> return friendship.sender_id == friendId)[0].id
 
-    FriendShip.update { friendshipId: friendShipId, friendship: { state: response } }
+    FriendShip.update { friendshipId: friendShipId, friendship: { receiver_id: $scope.user.id, state: response } }
     , success = (data) ->
       $scope.profile.friends = data.friends
       $scope.profile.friends.ids = data.friends.ids

@@ -1,3 +1,19 @@
-%div{ data: { 'ng-repeat' => 'department in departments' } }
-  %a{ data: { 'ui-sref' => 'places({ departmentId: department.slug})', 'ng-click' => 'setSelectedDepartment(department)' } }
-    {{department.name}}
+#loader{ data: { 'ng-if' => 'loading' }}
+  %img{ data: { 'ng-src' => "#{asset_path('loader.gif')}"} }
+#main-department-block.col-md-12.grid.animate-opacity{ data: { 'ng-if' => '!loading' }}
+  .header
+    REPRESENTEZ VOTRE DEPARTEMENT
+  .col-md-1
+  .col-md-10
+    .department-block.col-sm-12.col-xs-12{ data: { 'ng-repeat' => 'department in departments', 'ng-class' => "{'col-md-7': department.code == 75 || department.code == 78 || department.code == 95, 'col-md-5': department.code == 94 || department.code == 93 || department.code == 77 }" } }
+      %figure.effect-marley
+        %img{ data: { 'ng-src' => "{{department.image}}" } }
+        %figcaption{ data: { 'ui-sref' => 'places({ departmentId: department.slug})' } }
+          %h2
+            %span.department-code
+              {{department.code}}
+            %br
+            %span.department-name
+              {{department.name}}
+          %p
+            {{department.places_count}} Terrains

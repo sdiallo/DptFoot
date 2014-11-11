@@ -4,4 +4,8 @@ class Department < ActiveRecord::Base
   def slug
     "#{id}-#{name.parameterize}"
   end
+
+  def image
+    ActionController::Base.helpers.asset_path("department-#{self.code}.jpeg")
+  end
 end

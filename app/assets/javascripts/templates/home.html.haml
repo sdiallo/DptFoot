@@ -1,9 +1,7 @@
-Connect!
+#home-page
+  #connect-block
+    %div{ data: { 'ng-if' => '!user && wantConnect', 'ng-include' => "'connect_forms/connect.html'" } }
+    %div{ data: { 'ng-if' => '!user && !wantConnect', 'ng-include' => "'connect_forms/register.html'" } }
 
-#connect-block
-  %div{ data: { 'ng-if' => 'user != null', 'ng-include' => "'sidebar/user.html'" } }
-  %div{ data: { 'ng-if' => '!user && wantConnect', 'ng-include' => "'sidebar/connect.html'" } }
-  %div{ data: { 'ng-if' => '!user && !wantConnect', 'ng-include' => "'sidebar/register.html'" } }
-
-%a{ data: { 'ui-sref' => 'departments' } }
-  EXPLORE
+  %a{ data: { 'ui-sref' => 'departments' } }
+    EXPLORE

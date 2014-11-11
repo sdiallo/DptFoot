@@ -11,4 +11,9 @@ Rails.application.routes.draw do
   resources :participations, only: [:create, :index]
   resources :places, only: :show
 
+  get '/explore', to: 'redirect#redirect'
+  get '/profiles/:id', to: 'redirect#redirect'
+  get '/:id/places', to: 'redirect#redirect'
+  get '/:departmentId/places/:id', to: 'redirect#redirect'
+
 end

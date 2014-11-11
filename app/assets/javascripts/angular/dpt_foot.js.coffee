@@ -1,13 +1,24 @@
 window.DptFoot = angular.module 'DptFoot', ['ngResource', 'ngRoute', 'ngAnimate', 'templates', 'ui.router', 'Devise']
 
-DptFoot.config ['$locationProvider', '$stateProvider', '$urlRouterProvider', ($locationProvider, $stateProvider, $urlRouterProvider) ->
+
+DptFoot.run ($rootScope, $state, Current, User) ->
+  if localStorage['clientToken']? and localStorage['clientId']?
+    User.get { id: localStorage['clientId'] }
+    , success = (user) ->
+      Current.user = user
+      $rootScope.$broadcast 'user:logged_in', user
+      $state.go('departments') if $state.is('home')
+    , error = (data) ->
+      console.log data
+
+
+DptFoot.config ['$httpProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
 
   $locationProvider.html5Mode(true)
 
   $urlRouterProvider.otherwise('/')
 
   $stateProvider
-
   .state 'home',
     url: '/'
     templateUrl: 'home.html'
@@ -32,6 +43,17 @@ DptFoot.config ['$locationProvider', '$stateProvider', '$urlRouterProvider', ($l
     url: '/profiles/:userId'
     templateUrl: 'user.html'
     controller: 'UserCtrl'
+
+  $httpProvider.interceptors.push ($q, $log, $location) ->
+    request: (config) ->
+      return config if !localStorage['clientToken']?
+      config.headers['clientToken'] = localStorage['clientToken']
+      config.headers['clientId'] = localStorage['clientId']
+      return config
+
+    responseError: (response) ->
+
+
 
 ]
 

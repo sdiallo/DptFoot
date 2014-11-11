@@ -1,5 +1,7 @@
 class ParticipationsController < ApplicationController
 
+  before_action :validate_token!, only: :create
+
   def index
     place = Place.find(params[:id])
 

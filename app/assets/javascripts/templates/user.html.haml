@@ -12,7 +12,6 @@ FRIENDS :
   FRIENDS WAITING YOUR RESPONSE :
   %div{ data: { 'ng-repeat' => 'friend in profile.friends.waiting_friends'} }
     {{friend.username}}
-    {{friend.id}}
     %button{ data: { 'ng-click' => 'responseFriendShip(friend.id, true)' } }
       ACCEPT
     %button{ data: { 'ng-click' => 'responseFriendShip(friend.id, false)' } }

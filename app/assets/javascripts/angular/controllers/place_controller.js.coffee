@@ -1,5 +1,5 @@
 DptFoot.controller 'PlaceCtrl', ['$scope', '$stateParams', '$filter', 'Place', 'Participation', 'Current', ($scope, $stateParams, $filter, Place, Participation, Current) ->
-
+  
   Place.get { id: $stateParams['placeId'] }, (place, status) ->
     $scope.place = place
 

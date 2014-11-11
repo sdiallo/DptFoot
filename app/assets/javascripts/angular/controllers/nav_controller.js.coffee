@@ -1,4 +1,4 @@
-DptFoot.controller 'NavController', ['$rootScope', '$scope', '$state', '$location', 'Current', ($rootScope, $scope, $state, $location, Current) ->
+DptFoot.controller 'NavController', ['$rootScope', '$scope', '$state', '$location', 'Current', 'User', ($rootScope, $scope, $state, $location, Current, User) ->
 
   $scope.user = Current.user
 
@@ -9,5 +9,12 @@ DptFoot.controller 'NavController', ['$rootScope', '$scope', '$state', '$locatio
 
   $scope.$on 'user:logged_in', (event, user) ->
     $scope.user = user
+
+  $scope.logout = () ->
+    User.destroy_session { user: { id: Current.user.id } }, (data) ->
+      Current.user = null
+      localStorage['clientToken'] = null
+      localStorage['clientId'] = null
+      $scope.user = null
 
 ]
