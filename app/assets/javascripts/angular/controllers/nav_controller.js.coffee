@@ -13,8 +13,8 @@ DptFoot.controller 'NavController', ['$rootScope', '$scope', '$state', '$locatio
   $scope.logout = () ->
     User.destroy_session { user: { id: Current.user.id } }, (data) ->
       Current.user = null
-      localStorage['clientToken'] = null
-      localStorage['clientId'] = null
+      localStorage.removeItem('clientToken')
+      localStorage.removeItem('clientId')
       $scope.user = null
 
 ]
