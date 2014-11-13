@@ -1,9 +1,45 @@
-%div
-  {{place.name}}
-  {{place.address}}
+#loader{ data: { 'ng-if' => 'loading' }}
+  %img{ data: { 'ng-src' => "#{asset_path('loader.gif')}"} }
+#place-block.col-md-12.col-xs-12.animate-opacity{ data: { 'ng-if' => '!loading' }}
+  .header
+    {{place.name}}
 
-%div{ data: { 'ng-repeat' => 'participation in place.participations_with_users' } }
-  {{participation.user.username}}
-%div{ data: { 'ng-if' => 'user.id && !is_participant' } }
-  %button{ data: { 'ng-click' => 'participate()' } }
-    PARTICIPATE
+  .row
+    .col-md-1
+    #participants-block.col-md-6.col-xs-12
+      #participants-block-inner
+        %h2
+          PARTICIPANTS
+
+          .pull-right{ data: { 'ng-if' => 'user.id && !is_participant' } }
+            %button{ data: { 'ng-click' => 'participate()' } }
+              PARTICIPATE
+        #participants
+          #slickLoader{ data: { 'ng-if' => 'slickLoading' }}
+            %img{ data: { 'ng-src' => "#{asset_path('loader.gif')}"} }
+          %slick#slick{ data: { 'slick' => '', 'ng-class' => '{hide: slickLoading}' } }
+            %div{ data: { 'ng-repeat' => 'participations_grouped in participations' } }
+              .col-md-12.col-xs-12
+                %div{ data: { 'ng-repeat' => 'participation in participations_grouped' } }
+                  .participant.col-md-4.col-sm-12.col-xs-12
+                    %img{ 'ng-src' => ''}
+                    {{participation.user.username}}
+    #place-infos-block.col-md-4.col-xs-12
+      #place-infos-block-inner
+        %h2
+          ACCES TERRAIN
+
+    .col-md-1
+  .row
+    .col-md-1
+    #votes-block.col-md-6.col-xs-12
+      #votes-block-inner
+        %h2
+          VOTES DE LA JOURNEE
+        #votes
+
+    #past-mvp-block.col-md-4.col-xs-12
+      #past-mvp-block-inner
+        %h2
+          MEILLEUR JOUEUR D'HIER
+        #past-mvp

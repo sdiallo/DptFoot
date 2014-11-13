@@ -1,7 +1,5 @@
 class PlaceSerializer < ApplicationSerializer
-  attributes :id, :name, :address, :town, :slug, :department_slug, :participations_with_users, :participations_count_today
-
-  has_one :department
+  attributes :id, :name, :address, :town, :slug, :department_slug, :participations_with_users, :participations_count_today, :participations_ids_of_todays
 
   def slug
     object.slug
@@ -9,6 +7,10 @@ class PlaceSerializer < ApplicationSerializer
 
   def department_slug
     object.department.slug
+  end
+
+  def participations_ids_of_todays
+    object.participations.todays.pluck(:user_id)
   end
 
   def participations_with_users

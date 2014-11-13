@@ -4,7 +4,7 @@ class PlacesController < ApplicationController
     place = Place.find(params[:id])
 
       respond_to do |format|
-        format.json { render json: PlaceSerializer.new(place, root: false) }
+        format.json { render json: place, root: false }
       end
   end
 
